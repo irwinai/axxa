@@ -1,0 +1,20 @@
+ body {
+     padding: 0;
+     margin: 0;
+ }
+
+ .el-header {
+     padding: 0;
+ }
+
+ .el-menu--horizontal.el-menu {
+     padding: 0 30px;
+ }
+
+ .el-main {
+     padding: 30px 30px;
+ }
+
+ a {
+     text-decoration: none;
+ }
