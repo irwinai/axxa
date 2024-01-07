@@ -4,5 +4,11 @@
             "src": "/api/(.*)",
             "dest": "http://109.123.231.12:8080/$1"
         }
+    ],
+    "rewrites": [
+        {
+            "source": "/:path*",
+            "destination": "/index.html"
+        }
     ]
 }
