@@ -12,7 +12,7 @@ const form = reactive({
 let loading = ref(false);
 let balanceData = ref([]);
 
-const url = 'http://109.123.231.12:8080/api?type=POST&targetUrl=https://api.evm.ink/v1/graphql/';
+const url = '/api?type=POST&targetUrl=https://api.evm.ink/v1/graphql/';
 const requestJson = computed(() => {
     return {
         "query": "query GetBrc20UserBalances($limit: Int = 10, $offset: Int = 0, $order_by: [brc20_user_balances_order_by!] = {}, $where: brc20_user_balances_bool_exp = {}) {\n  brc20_user_balances(\n    limit: $limit\n    offset: $offset\n    order_by: $order_by\n    where: $where\n  ) {  \n    balance\n    owner\n    protocol\n    tick\n    network_id\n    token {\n      decimal_digits\n    }\n  }\n}",
