@@ -68,7 +68,7 @@ watch(() => route.path, (newPath) => {
     <el-sub-menu index="exit" v-else>
       <template #title>{{ store.sliceAccount }}</template>
       <el-menu-item index="exit-0">
-        <span @click="disconnectWallet()" style="width: 100%;display: block;">退出登录</span>
+        <span @click="disconnectWallet()" class="menu-item">退出登录</span>
       </el-menu-item>
     </el-sub-menu>
   </el-menu>
@@ -76,6 +76,11 @@ watch(() => route.path, (newPath) => {
 
 
 <style>
+.menu-item {
+  width: 100%;
+  display: block;
+}
+
 .my-el-menu .el-menu--popup {
   min-width: 150px;
 }
