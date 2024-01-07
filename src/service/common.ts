@@ -4,7 +4,7 @@ import EvmTokens from '@/data/evm-tokens';
 
 
 export const useWeb3 = (provider: any) => {
-    const web3 = new Web3(!provider ? window.ethereum : provider);
+    const web3 = new Web3(!provider ? (window as any).ethereum : provider);
     // const web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545"));
 
     // Log the current block number to the console
