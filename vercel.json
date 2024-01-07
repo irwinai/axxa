@@ -4,13 +4,5 @@
             "source": "/:path*",
             "destination": "/index.html"
         }
-    ],
-    "proxy": {
-        "/api/(.*)": {
-            "target": "http://109.123.231.12:8080/",
-            "methods": [
-                "POST"
-            ]
-        }
-    }
+    ]
 }
