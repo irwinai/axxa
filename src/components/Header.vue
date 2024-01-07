@@ -76,6 +76,14 @@ watch(() => route.path, (newPath) => {
 
 
 <style>
+.my-el-menu .el-menu-item {
+  padding: 0;
+}
+
+.my-el-menu .el-menu-item a {
+  padding: 0 20px;
+}
+
 .menu-item {
   width: 100%;
   display: block;
