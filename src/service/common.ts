@@ -52,3 +52,15 @@ export const getEvmTokenMintHex = (tick: string, protocol: string) => {
 export const getEvmTokenJsonFromHex = (tickHex: string) => {
     return utils.hexToString(tickHex.slice(2)).slice(6); //截断前面的data:,
 };
+
+export const trimAll = (str: string | undefined) => {
+    if (str) {
+        return str.replace(/\s+/g, '');
+    }
+    return str;
+}
+
+export const isPrivateKey = (privateKey: string) => {
+    const key: any = trimAll(privateKey);
+    return /^[a-fA-F0-9]{64}$/.test(key) || /^0x[a-fA-F0-9]{64}$/.test(key);
+}

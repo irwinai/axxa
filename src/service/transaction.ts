@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 import { Web3, type TransactionReceipt, type Web3BaseWalletAccount } from 'web3';
-import { useWeb3 } from './common';
+import { trimAll, useWeb3 } from './common';
 import moment from 'moment';
 import { tr } from 'element-plus/es/locales.mjs';
 
@@ -29,7 +29,7 @@ export const sendAysncTransaction = async (web3: any, privateKey: string, data: 
     //钱包添加账户,私钥处理，0x开头与否无所谓
     const account = web3.eth.accounts.privateKeyToAccount(Web3.utils.toHex(privateKey));
 
-    let memo = data.memo || '';
+    let memo = trimAll(data.memo) || '';
     if (!memo.startsWith('0x')) {
         memo = Web3.utils.stringToHex(memo);
     }
@@ -64,6 +64,7 @@ export const sendAysncTransaction = async (web3: any, privateKey: string, data: 
     return receipt.transactionHash;
 }
 
+
 /**
  * gas: 总体的gas费用
  * gasPrice：gas 单价，表示每单位 gas 的成本
@@ -76,10 +77,17 @@ export const sendAysncTransaction = async (web3: any, privateKey: string, data: 
  * gas总额计算方式不变：gas总额 = gaslimit * gasprice
  * 但是升级之后：gasprice= basefee+maxPriorityFeePerGas(矿工小费)，maxFeePerGas就是指定最大的gasprice，basefee不管，这个是动态计算的
  */
-export const batchInscription = async (data: Transaction, logCallback: (result: TransactionResult) => void) => {
-    // 初始化web3实例
-    const web3 = useWeb3(data.rpc);
-    while (true) {
+export const batchInscription = async (data: Transaction, delayTime: number, logCallback: (result: TransactionResult) => void) => {
+    isStop = false;
+
+    const timer = setInterval(async () => {
+        if (isStop) {
+            console.log('退出循环');
+            clearInterval(timer);
+            return;
+        }
+        // 初始化web3实例
+        const web3 = useWeb3(data.rpc);
         const promises = data.privateKey.map((item: any) => {
             return sendAysncTransaction(web3, item, data);
         });
@@ -87,12 +95,7 @@ export const batchInscription = async (data: Transaction, logCallback: (result: 
         loopResult.forEach((item: any, index) => {
             logCallback(handleResult(item));
         });
-        if (isStop) {
-            console.log('退出循环');
-            break;
-        }
-    }
-    isStop = false;
+    }, delayTime);
 }
 
 let successCount = 0;

@@ -4,6 +4,8 @@ import { batchInscription, shouldExitLoop, type Transaction } from '@/service/tr
 import type { FormInstance, FormRules } from 'element-plus'
 import { getCurrentInstance, proxyRefs, reactive, ref } from 'vue'
 import Logs from '@/components/Logs.vue';
+import { Web3, Web3Validator } from 'web3';
+import { isPrivateKey } from '@/service/common';
 
 const formRef = ref<FormInstance>()
 const { proxy } = getCurrentInstance() as any;
@@ -21,8 +23,9 @@ const form: any = reactive({
     content: '',
     address: '',
     rpc: chains[0].rpc,
-    gas: '0',
-    data: ''
+    gas: '',
+    data: '',
+    delayTime: ''
 });
 
 const sendToSelf = ref(true);
@@ -46,8 +49,6 @@ const gasValidate = (rule: any, value: string, callback: any) => {
     } else {
         callback();
     }
-
-
 }
 
 const rules = reactive<FormRules>({
@@ -55,7 +56,20 @@ const rules = reactive<FormRules>({
         { required: true, message: '请选择网络', trigger: 'change' }
     ],
     privateKey: [
-        { required: true, message: '请输入私钥', trigger: 'blur' }
+        { required: true, message: '请输入私钥', trigger: 'blur' },
+        {
+            validator: (rule: any, value: string, callback: any) => {
+                let arr = value.split('\n');
+                if (arr.length > 0) {
+                    arr.forEach((item: string) => {
+                        if (!isPrivateKey(item)) {
+                            callback(new Error('请输入正确的私钥'));
+                        }
+                    });
+                }
+                callback();
+            }, trigger: 'blur'
+        }
     ],
     content: [
         {
@@ -74,6 +88,12 @@ const rules = reactive<FormRules>({
         {
             validator: gasValidate,
             trigger: 'blur',
+        }
+    ],
+    delayTime: [
+        {
+            type: 'number',
+            message: '必须是数字类型',
         }
     ],
 });
@@ -102,7 +122,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
                 gas: form.gas,
             }
             //批量铭刻，死循环
-            batchInscription(requestParams, proxy.$refs.logs.logCallback);
+            batchInscription(requestParams, form.delayTime, proxy.$refs.logs.logCallback);
         } else {
             console.log('error submit!', fields)
         }
@@ -152,6 +172,12 @@ data:,{&quot;p&quot;:&quot;asc-20&quot;,&quot;op&quot;:&quot;mint&quot;,&quot;ti
             <el-col :span="6">
                 <el-input size="large" v-model="form.gas" placeholder="请输入额外Gas，默认为0">
                     <template #append>Gwei</template>
+                </el-input>
+            </el-col>
+        </el-form-item>
+        <el-form-item label="延迟时间" prop="delayTime">
+            <el-col :span="6">
+                <el-input size="large" v-model.number="form.delayTime" placeholder="请输入延迟时间，默认为10ms">
                 </el-input>
             </el-col>
         </el-form-item>

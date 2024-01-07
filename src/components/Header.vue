@@ -6,7 +6,7 @@ import { useRoute, useRouter } from 'vue-router';
 const store = useAccountStore();
 const route = useRoute();
 const router = useRouter();
-const activeMenu: any = ref('0');
+const activeMenu: any = ref('-1');
 const routes = router.getRoutes();
 
 const getActiveMenu = () => {
