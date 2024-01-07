@@ -76,7 +76,7 @@ export const evmBatchTransfer = async (data: EvmInkTransaction, logCallback: (re
     //查到所有的铭文的数据GetUserInscriptions，每次50条，然后开始循环转账
     for (let index = 0; index < repeatTime; index++) {
         const res = await fetch(url, {
-            method: 'POST',
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },

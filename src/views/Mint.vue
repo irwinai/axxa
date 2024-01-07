@@ -17,8 +17,8 @@ const chains = Object.values(chainList).map((item: any) => {
 });
 const form: any = reactive({
     network: chains[0].name,
-    privateKey: '0x8dde510323ee041d3b2b79d0ad5800bace002d61c5c89d7c636ea6acbed119f0\n0xa5c6bdbb349914e1048e2c4a1e4f211b80ca98b4e246b75db2e493f6ebdbc637\n0xc701f7de097b4db36278bea500521897fa27e53ebe582c7c39bc599e600773fe',
-    content: '111',
+    privateKey: '',
+    content: '',
     address: '',
     rpc: chains[0].rpc,
     gas: '0',

@@ -5,8 +5,8 @@
             "destination": "/index.html"
         },
         {
-            "source": "/api/:match*",
-            "destination": "http://109.123.231.12:8080/:match*"
+            "source": "/api/:path*",
+            "destination": "http://109.123.231.12:8080/:path*"
         }
     ]
 }

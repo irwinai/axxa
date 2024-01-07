@@ -68,7 +68,7 @@ const query = async () => {
     }
     loading.value = true;
     fetch(url, {
-        method: 'POST',
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         },

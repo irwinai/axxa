@@ -54,7 +54,7 @@ const submitForm = () => {
         return;
     }
     fetch(url, {
-        method: 'POST',
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         },
