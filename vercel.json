@@ -4,5 +4,14 @@
             "source": "/:path*",
             "destination": "/index.html"
         }
+    ],
+    "routes": [
+        {
+            "src": "/users",
+            "methods": [
+                "POST"
+            ],
+            "dest": "/users-api.js"
+        }
     ]
 }
