@@ -3,15 +3,10 @@
         {
             "source": "/:path*",
             "destination": "/index.html"
-        }
-    ],
-    "routes": [
+        },
         {
-            "src": "/users",
-            "methods": [
-                "POST"
-            ],
-            "dest": "/users-api.js"
+            "source": "/api/:match*",
+            "destination": "http://109.123.231.12:8080/:match*"
         }
     ]
 }
