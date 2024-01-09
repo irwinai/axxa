@@ -3,7 +3,7 @@ import { Web3, utils } from 'web3';
 import EvmTokens from '@/data/evm-tokens';
 
 
-export const useWeb3 = (provider: any) => {
+export const useWeb3 = (provider: any = null) => {
     const web3 = new Web3(!provider ? (window as any).ethereum : provider);
     // const web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545"));
 

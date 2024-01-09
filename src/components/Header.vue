@@ -56,6 +56,14 @@ watch(() => route.path, (newPath) => {
         <RouterLink class="menu-item" to="/evmInk/transfer">批量转账</RouterLink>
       </el-menu-item>
     </el-sub-menu>
+
+    <el-sub-menu index="4">
+      <template #title>工具合集</template>
+      <el-menu-item index="4-1">
+        <RouterLink class="menu-item" to="/batch/create/wallet">批量生成钱包</RouterLink>
+      </el-menu-item>
+    </el-sub-menu>
+
     <el-menu-item index="99">
       <RouterLink class="menu-item" to="/author">关于作者</RouterLink>
     </el-menu-item>

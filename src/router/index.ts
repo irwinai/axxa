@@ -5,6 +5,7 @@ import EvmInkListView from '@/views/EvmInkList.vue'
 import EvmInkTransferView from '@/views/EvmInkTransfer.vue'
 import ToolsView from '@/views/Tools.vue'
 import AuthorView from '@/views/Author.vue'
+import BatchCreateWalletView from '@/views/BatchCreateWallet.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -63,6 +64,14 @@ const router = createRouter({
       component: EvmInkListView,
       meta: {
         activeMenu: '3-2'
+      }
+    },
+    {
+      path: '/batch/create/wallet',
+      name: 'batchCreateWallet',
+      component: BatchCreateWalletView,
+      meta: {
+        activeMenu: '4-1'
       }
     },
   ]

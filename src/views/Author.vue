@@ -16,7 +16,8 @@ import { ref } from 'vue';
       这是一个纯前端的网站，没有涉及到后端的任何存储，嗯...如果你觉得不安全...随意了...
     </div>
     <div class="content">
-      如果对本网站有任何的意见以及建议，可以联系我的 <a href="https://t.me/+XAbTwaNum05hNzg1" target="_blank" rel="noopener noreferrer">电报账号</a>
+      如果对本网站有任何的意见以及建议，可以联系我的 <el-link type="success" href="https://t.me/+XAbTwaNum05hNzg1" target="_blank"
+        rel="noopener noreferrer">电报账号</el-link>
     </div>
     <div class="content">
       另外，我在公众号、抖音也拥有不少的粉丝，全网粉丝也有个 8 万人了吧，长期持续输出很多年了，嗯... 或许从网站 Logo 你能知道我是谁。

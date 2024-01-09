@@ -1,28 +1,22 @@
 <script setup lang="ts">
-import { chainList } from '@/data/chain';
 import { batchInscription, shouldExitLoop, type Transaction } from '@/service/transaction';
 import type { FormInstance, FormRules } from 'element-plus'
 import { getCurrentInstance, proxyRefs, reactive, ref } from 'vue'
 import Logs from '@/components/Logs.vue';
 import { Web3, Web3Validator } from 'web3';
 import { isPrivateKey } from '@/service/common';
+import SelectChain from '@/components/SelectChain.vue';
 
 const formRef = ref<FormInstance>()
 const { proxy } = getCurrentInstance() as any;
 
-const chains = Object.values(chainList).map((item: any) => {
-    return {
-        id: item.id,
-        name: item.name,
-        rpc: item.rpcUrls.default.http[0]
-    }
-});
+
 const form: any = reactive({
-    network: chains[0].name,
+    network: '',
     privateKey: '',
     content: '',
     address: '',
-    rpc: chains[0].rpc,
+    rpc: '',
     gas: '',
     data: '',
     delayTime: ''
@@ -128,28 +122,21 @@ const submitForm = async (formEl: FormInstance | undefined) => {
         }
     })
 }
-
+const changeChain = (chain: any) => {
+    form.rpc = chain.rpc
+    form.network = chain.name
+}
 const stop = () => {
     isRunning.value = false;
     shouldExitLoop();
 }
 
-const changeChain = () => {
-    let chain = chains.find((item: any) => item.name === form.network);
-    if (chain) {
-        form.rpc = chain.rpc;
-    }
-}
 </script>
 <template>
     <el-form :model="form" :rules="rules" label-width="120px" ref="formRef" status-icon>
         <el-form-item label="网络" prop="network">
             <el-col :span="6">
-                <el-select class="net-select" v-model="form.network" placeholder="请选择网络" filterable size="large"
-                    @change="changeChain()">
-                    <el-option v-for="item in chains" :label="item.name" :value="item.name" :key="item.id">
-                    </el-option>
-                </el-select>
+                <SelectChain v-model:network="form.network" @change="changeChain"></SelectChain>
             </el-col>
         </el-form-item>
         <el-form-item label="私钥" prop="privateKey">
