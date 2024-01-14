@@ -11,6 +11,7 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "@types/web3": "^1.2.2",
     "@vercel/analytics": "^1.1.1",
     "bip39": "^3.1.0",
     "crypto-js": "^4.2.0",

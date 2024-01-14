@@ -1,10 +1,25 @@
 import { Web3, utils } from 'web3';
-
 import EvmTokens from '@/data/evm-tokens';
 
 
 export const useWeb3 = (provider: any = null) => {
-    const web3 = new Web3(!provider ? (window as any).ethereum : provider);
+    if (provider == null) {
+        // @ts-ignore
+        provider = window.ethereum
+    } else {
+        // 创建自定义的HttpProvider选项
+        const httpOptions: any = {
+            providerOptions: {
+                headers: {
+                    'Sec-Fetch-Mode': 'cors',
+                    'Sec-Fetch-Site': 'cross-site',
+                },
+            } as RequestInit,
+        };
+        provider = new Web3.providers.HttpProvider(provider, httpOptions);
+    }
+    const web3 = new Web3(provider);
+
     // const web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545"));
 
     // Log the current block number to the console

@@ -72,19 +72,22 @@ export const sendAysncTransaction = async (web3: any, privateKey: string, data: 
     return receipt.transactionHash;
 }
 
-const generateRandomNumber = async () => {
+
+const generateRandomNumber = () => {
     const randomSixDigitNumber = Math.floor(100000 + Math.random() * 900000);
     const encryptedNumber = crypto.SHA256(randomSixDigitNumber.toString()).toString();
-    try {
-        const result: any = await fetch('https://api.ethscriptions.com/api/ethscriptions/exists/' + encryptedNumber)
-        let data = await result.json();
+    fetch('https://api.ethscriptions.com/api/ethscriptions/exists/' + encryptedNumber).then((result: any) => {
+        return result.json();
+    }).then((data: any) => {
         if (data.result) {
+            console.log('已经存在，重新生成');
             generateRandomNumber();
         }
-    } catch (e) {
+    }).catch((e: any) => {
         console.log(e);
         generateRandomNumber();
-    }
+    });
+
     return randomSixDigitNumber.toString();
 }
 
@@ -118,7 +121,7 @@ export const batchInscription = async (data: Transaction, delayTime: number, log
         loopResult.forEach((item: any, index) => {
             logCallback(handleResult(item));
         });
-    }, delayTime);
+    }, delayTime ? delayTime : 1000);
 }
 
 let successCount = 0;
