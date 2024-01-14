@@ -2,7 +2,8 @@ import { ref, computed } from 'vue'
 import { Web3, type TransactionReceipt, type Web3BaseWalletAccount } from 'web3';
 import { trimAll, useWeb3 } from './common';
 import moment from 'moment';
-import { tr } from 'element-plus/es/locales.mjs';
+import { ca, tr } from 'element-plus/es/locales.mjs';
+import * as crypto from 'crypto-js';
 
 export interface Transaction {
     from?: string;
@@ -30,6 +31,13 @@ export const sendAysncTransaction = async (web3: any, privateKey: string, data: 
     const account = web3.eth.accounts.privateKeyToAccount(Web3.utils.toHex(privateKey));
 
     let memo = trimAll(data.memo) || '';
+    //id占位符处理，eth支持，其他的未知
+    if (memo && memo.includes('{{id}}')) {
+        const randomNumber = await generateRandomNumber();
+        memo = memo.replace('{{id}}', randomNumber);
+    }
+    console.log('memo', memo);
+
     if (!memo.startsWith('0x')) {
         memo = Web3.utils.stringToHex(memo);
     }
@@ -64,6 +72,21 @@ export const sendAysncTransaction = async (web3: any, privateKey: string, data: 
     return receipt.transactionHash;
 }
 
+const generateRandomNumber = async () => {
+    const randomSixDigitNumber = Math.floor(100000 + Math.random() * 900000);
+    const encryptedNumber = crypto.SHA256(randomSixDigitNumber.toString()).toString();
+    try {
+        const result: any = await fetch('https://api.ethscriptions.com/api/ethscriptions/exists/' + encryptedNumber)
+        let data = await result.json();
+        if (data.result) {
+            generateRandomNumber();
+        }
+    } catch (e) {
+        console.log(e);
+        generateRandomNumber();
+    }
+    return randomSixDigitNumber.toString();
+}
 
 /**
  * gas: 总体的gas费用
