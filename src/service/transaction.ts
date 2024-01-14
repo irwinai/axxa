@@ -3,7 +3,7 @@ import { Web3, type TransactionReceipt, type Web3BaseWalletAccount } from 'web3'
 import { trimAll, useWeb3 } from './common';
 import moment from 'moment';
 import { ca, tr } from 'element-plus/es/locales.mjs';
-import * as crypto from 'crypto-js';
+import crypto from 'crypto-js';
 
 export interface Transaction {
     from?: string;
