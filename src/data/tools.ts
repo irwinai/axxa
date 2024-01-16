@@ -67,5 +67,11 @@ export default {
             name: 'web3 club',
             description: "web3工具箱"
         },
+        {
+            logo: new URL('@/assets/media/web3/mint/coinank.png', import.meta.url).href,
+            path: 'https://coinank.com/zh/ordinals/brc20/heatmap',
+            name: 'CoinAnk',
+            description: "实用的加密货币数据产品和专业的图表可视化软件"
+        },
     ]
 }
