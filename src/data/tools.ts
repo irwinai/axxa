@@ -26,6 +26,12 @@ export default {
             description: "实时监控铭文铸造状态"
         },
         {
+            logo: new URL('@/assets/media/web3/mint/nftsniper.jpeg', import.meta.url).href,
+            path: 'https://www.nftsniper.club/',
+            name: 'nftsniper',
+            description: "一个很贵你还买不上的付费打铭文工具"
+        },
+        {
             logo: new URL('@/assets/media/web3/mint/ave.jpeg', import.meta.url).href,
             path: 'https://ave.ai/',
             name: 'ave.ai',

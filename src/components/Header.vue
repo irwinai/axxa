@@ -41,6 +41,9 @@ watch(() => route.path, (newPath) => {
     <el-menu-item index="1">
       <RouterLink class="menu-item" to="/tools">工具导航</RouterLink>
     </el-menu-item>
+    <el-menu-item index="5">
+      <RouterLink class="menu-item" to="/airdrop">空投导航</RouterLink>
+    </el-menu-item>
     <el-menu-item index="2">
       <RouterLink class="menu-item" to="/mint">铭文铭刻</RouterLink>
     </el-menu-item>
