@@ -129,6 +129,7 @@ let successCount = 0;
 export const handleResult = (item: any): TransactionResult => {
     let msg: string = '';
     let status: TransactionResultStatus;
+    console.log(item)
     if (item.status === 'fulfilled') {
         msg = item.value.receipt;
         successCount++;

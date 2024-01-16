@@ -60,6 +60,24 @@ export default {
             path: 'https://frc20.io',
             name: 'FTM',
             description: 'FRC20、fans 市场'
+        },
+        {
+            logo: new URL('@/assets/media/web3/mint/sei.jpeg', import.meta.url).href,
+            path: 'https://www.sei20.xyz/marketplace',
+            name: 'SEI-20',
+            description: 'seis、seix 市场'
+        },
+        {
+            logo: new URL('@/assets/media/web3/mint/dreamx.jpeg', import.meta.url).href,
+            path: 'https://dreamx.space/?utm_source=tokenpocket#/market/collection/53',
+            name: 'Dreamx Space',
+            description: 'fair-20 市场'
+        },
+        {
+            logo: new URL('@/assets/media/web3/mint/friend3.png', import.meta.url).href,
+            path: 'https://inscribe.friend3.group/marketplace',
+            name: 'Friend3',
+            description: 'sofi 市场'
         }
     ]
 }
