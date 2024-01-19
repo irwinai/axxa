@@ -65,6 +65,9 @@ watch(() => route.path, (newPath) => {
       <el-menu-item index="4-1">
         <RouterLink class="menu-item" to="/batch/create/wallet">批量生成钱包</RouterLink>
       </el-menu-item>
+      <el-menu-item index="4-3">
+        <RouterLink class="menu-item" to="/gm/turnup">turnup全自动</RouterLink>
+      </el-menu-item>
     </el-sub-menu>
 
     <el-menu-item index="99">
