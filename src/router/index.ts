@@ -6,6 +6,7 @@ import EvmInkTransferView from '@/views/EvmInkTransfer.vue'
 import ToolsView from '@/views/Tools.vue'
 import AuthorView from '@/views/Author.vue'
 import BatchCreateWalletView from '@/views/BatchCreateWallet.vue'
+import GameTurnup from '@/views/Turnup.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -72,6 +73,14 @@ const router = createRouter({
       component: BatchCreateWalletView,
       meta: {
         activeMenu: '4-1'
+      }
+    },
+    {
+      path: '/gm/turnup',
+      name: 'turnup',
+      component: GameTurnup,
+      meta: {
+        activeMenu: '4-3'
       }
     },
   ]
