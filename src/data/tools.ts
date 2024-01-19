@@ -26,6 +26,12 @@ export default {
             description: "实时监控铭文铸造状态"
         },
         {
+            logo: new URL('@/assets/media/web3/mint/nftsniper.jpeg', import.meta.url).href,
+            path: 'https://www.nftsniper.club/',
+            name: 'nftsniper',
+            description: "一个很贵你还买不上的付费打铭文工具"
+        },
+        {
             logo: new URL('@/assets/media/web3/mint/ave.jpeg', import.meta.url).href,
             path: 'https://ave.ai/',
             name: 'ave.ai',
@@ -66,6 +72,12 @@ export default {
             path: 'https://www.web3club.tech/zh',
             name: 'web3 club',
             description: "web3工具箱"
+        },
+        {
+            logo: new URL('@/assets/media/web3/mint/coinank.png', import.meta.url).href,
+            path: 'https://coinank.com/zh/ordinals/brc20/heatmap',
+            name: 'CoinAnk',
+            description: "实用的加密货币数据产品和专业的图表可视化软件"
         },
     ]
 }
