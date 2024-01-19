@@ -11,6 +11,7 @@ const tokenInfo = reactive({
     workerList: [] as any,
 });
 const isAutoWorking = ref(false);
+const loading = ref(false);
 const commonFetch = async (url: string, data: object = {}) => {
     try {
         const response = await fetch(`https://turnup-uw-test-apiv2.turnup.so/api${url}`, {
@@ -58,8 +59,10 @@ const updateTokenInfo = async () => {
 };
 const main = async () => {
     if (tokenInput.value) {
+        loading.value = true;
         clearInterval(timerMain);
         await updateTokenInfo();
+        loading.value = false;
         timerMain = setInterval(updateTokenInfo, 10000);
         showInfo.value = true;
     } else {
@@ -166,106 +169,109 @@ const friendTradeTakeWorkCoin = async (employeeId: string) => {
             <el-form-item label="TOKEN:">
                 <el-input v-model="tokenInput" @blur="main" />
             </el-form-item>
+            <span v-if="showUserInfo" class="ad">喜欢的持有下我的 key 吧，感谢：turnup.so/@tiantianranran</span>
         </el-form>
 
-        <div v-if="showUserInfo">
-            <h2 class="info-text">{{ tokenInfo.userInfo.platformData.platformMap[1].displayName }}</h2>
-            <div class="user-info">
-                <span>
-                    <span>持有人：</span>
-                    <span class="info-text">{{ tokenInfo.userInfo.holdersNum }}</span>
-                </span>
-                <span>
-                    <span>持有：</span>
-                    <span class="info-text">{{ tokenInfo.userInfo.holding }}</span>
-                </span>
-                <span>
-                    <span>自持：</span>
-                    <span class="info-text">{{ tokenInfo.userInfo.youOwnKeyNum }}</span>
-                </span>
-                <span>
-                    <span>解锁最高矿场：</span>
-                    <span class="info-text">{{ tokenInfo.userInfo.selfData.unlockWorkIds.length }}</span>
-                </span>
-            </div>
-            <div class="earn-info">
-                <span>
-                    <span>matic 余额：</span>
-                    <span class="info-text">{{ Number(tokenInfo.userInfo.selfData.balance).toFixed(3) }}</span>
-                </span>
-                <span>
-                    <span>$LFG Pool：</span>
-                    <span class="info-text">{{ tokenInfo.userInfo.selfData.claimCoin }}</span>
-                </span>
-                <span>
-                    <span>$LFG：</span>
-                    <span class="info-text">{{ tokenInfo.userInfo.selfData.vCoin }}</span>
-                </span>
-                <span>
-                    <span>$UP：</span>
-                    <span class="info-text">{{ tokenInfo.userInfo.selfData.points }}</span>
-                </span>
-                <span>
-                    <span>$power：</span>
-                    <span class="info-text">{{ tokenInfo.userInfo.selfData.power }}</span>
-                </span>
-            </div>
-            <div v-if="workerState.count">
-                <el-button id="auto-button" @click="autoButtonClick" :type="isAutoWorking ? 'danger' : 'primary'">
-                    <span v-if="isAutoWorking">运行中</span>
-                    自动挖矿（{{ workerState.count }}）
-                </el-button>
-                <div class="kuangji-info">
-                    <el-table
-                        ref="multipleTableRef"
-                        :data="tokenInfo.workerList"
-                        style="width: 100%"
-                        :row-key="(row) => row.userId"
-                        @selection-change="handleSelectionChange"
-                    >
-                        <el-table-column :reserve-selection="true" type="selection" width="55" />
-                        <el-table-column
-                            :reserve-selection="true"
-                            label="矿机名称"
-                            width="120"
-                            property="profile.displayName"
+        <div class="info-content" v-loading="loading">
+            <div v-if="showUserInfo">
+                <h2 class="info-text">{{ tokenInfo.userInfo.platformData.platformMap[1].displayName }}</h2>
+                <div class="user-info">
+                    <span>
+                        <span>持有人：</span>
+                        <span class="info-text">{{ tokenInfo.userInfo.holdersNum }}</span>
+                    </span>
+                    <span>
+                        <span>持有：</span>
+                        <span class="info-text">{{ tokenInfo.userInfo.holding }}</span>
+                    </span>
+                    <span>
+                        <span>自持：</span>
+                        <span class="info-text">{{ tokenInfo.userInfo.youOwnKeyNum }}</span>
+                    </span>
+                    <span>
+                        <span>解锁最高矿场：</span>
+                        <span class="info-text">{{ tokenInfo.userInfo.selfData.unlockWorkIds.length }}</span>
+                    </span>
+                </div>
+                <div class="earn-info">
+                    <span>
+                        <span>matic 余额：</span>
+                        <span class="info-text">{{ Number(tokenInfo.userInfo.selfData.balance).toFixed(3) }}</span>
+                    </span>
+                    <span>
+                        <span>$LFG Pool：</span>
+                        <span class="info-text">{{ tokenInfo.userInfo.selfData.claimCoin }}</span>
+                    </span>
+                    <span>
+                        <span>$LFG：</span>
+                        <span class="info-text">{{ tokenInfo.userInfo.selfData.vCoin }}</span>
+                    </span>
+                    <span>
+                        <span>$UP：</span>
+                        <span class="info-text">{{ tokenInfo.userInfo.selfData.points }}</span>
+                    </span>
+                    <span>
+                        <span>$power：</span>
+                        <span class="info-text">{{ tokenInfo.userInfo.selfData.power }}</span>
+                    </span>
+                </div>
+                <div v-if="workerState.count">
+                    <el-button id="auto-button" @click="autoButtonClick" :type="isAutoWorking ? 'danger' : 'primary'">
+                        <span v-if="isAutoWorking">运行中</span>
+                        自动挖矿（{{ workerState.count }}）
+                    </el-button>
+                    <div class="kuangji-info">
+                        <el-table
+                            ref="multipleTableRef"
+                            :data="tokenInfo.workerList"
+                            style="width: 100%"
+                            :row-key="(row) => row.userId"
+                            @selection-change="handleSelectionChange"
                         >
-                            <template #header>
-                                <div>挖矿中：{{ workerState.working }}</div>
-                                <div>暂停中：{{ workerState.paused }}</div>
-                                <div>总矿机：{{ workerState.count }}</div>
-                            </template>
-                        </el-table-column>
-                        <el-table-column :reserve-selection="true" property="tierId" label="等级" width="120" />
-                        <el-table-column :reserve-selection="true" property="holdingNum" label="持有 key" />
-                        <el-table-column :reserve-selection="true" property="buyPrice" label="价格">
-                            <template #default="scope">
-                                {{ `${Number(scope?.row?.buyPrice).toFixed(2)}` }}
-                            </template>
-                        </el-table-column>
-                        <el-table-column :reserve-selection="true" property="energy" label="体力" />
-                        <el-table-column :reserve-selection="true" label="当前矿场">
-                            <template #default="scope">
-                                {{ `${scope?.row?.workName} (${scope?.row?.workId})` }}
-                            </template>
-                        </el-table-column>
-                        <el-table-column :reserve-selection="true" label="挖矿利润">
-                            <template #header>
-                                <div>挖矿利润</div>
-                                <div>（{{ Number(workerState.selfWorkProfit).toFixed(3) }}）</div>
-                            </template>
-                            <template #default="scope">{{ `${scope?.row?.selfWorkProfit}` }}</template>
-                        </el-table-column>
-                        <el-table-column :reserve-selection="true" label="挖矿结束时间">
-                            <template #default="scope">
-                                {{
-                                    scope?.row?.workEndTimestamp
-                                        ? moment(scope?.row?.workEndTimestamp * 1000).format('YYYY-MM-DD HH:mm:ss')
-                                        : ''
-                                }}
-                            </template>
-                        </el-table-column>
-                    </el-table>
+                            <el-table-column :reserve-selection="true" type="selection" width="55" />
+                            <el-table-column
+                                :reserve-selection="true"
+                                label="矿机名称"
+                                width="120"
+                                property="profile.displayName"
+                            >
+                                <template #header>
+                                    <div>挖矿中：{{ workerState.working }}</div>
+                                    <div>暂停中：{{ workerState.paused }}</div>
+                                    <div>总矿机：{{ workerState.count }}</div>
+                                </template>
+                            </el-table-column>
+                            <el-table-column :reserve-selection="true" property="tierId" label="等级" width="120" />
+                            <el-table-column :reserve-selection="true" property="holdingNum" label="持有 key" />
+                            <el-table-column :reserve-selection="true" property="buyPrice" label="价格">
+                                <template #default="scope">
+                                    {{ `${Number(scope?.row?.buyPrice).toFixed(2)}` }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column :reserve-selection="true" property="energy" label="体力" />
+                            <el-table-column :reserve-selection="true" label="当前矿场">
+                                <template #default="scope">
+                                    {{ `${scope?.row?.workName} (${scope?.row?.workId})` }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column :reserve-selection="true" label="挖矿利润">
+                                <template #header>
+                                    <div>挖矿利润</div>
+                                    <div>（{{ Number(workerState.selfWorkProfit).toFixed(3) }}）</div>
+                                </template>
+                                <template #default="scope">{{ `${scope?.row?.selfWorkProfit}` }}</template>
+                            </el-table-column>
+                            <el-table-column :reserve-selection="true" label="挖矿结束时间">
+                                <template #default="scope">
+                                    {{
+                                        scope?.row?.workEndTimestamp
+                                            ? moment(scope?.row?.workEndTimestamp * 1000).format('YYYY-MM-DD HH:mm:ss')
+                                            : ''
+                                    }}
+                                </template>
+                            </el-table-column>
+                        </el-table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -294,5 +300,16 @@ const friendTradeTakeWorkCoin = async (employeeId: string) => {
 #auto-button {
     display: block;
     margin: 10px auto;
+}
+.ad {
+    width: 100%;
+    color: #848484;
+    text-align: center;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.info-content {
+    min-height: 30vh;
 }
 </style>
