@@ -67,6 +67,10 @@ watch(() => route.path, (newPath) => {
       </el-menu-item>
     </el-sub-menu>
 
+    <el-menu-item index="98">
+      <a class="menu-item" href="https://github.com/irwinai/axxa" target="_blank">Github</a>
+    </el-menu-item>
+
     <el-menu-item index="99">
       <RouterLink class="menu-item" to="/author">关于作者</RouterLink>
     </el-menu-item>
@@ -134,6 +138,10 @@ watch(() => route.path, (newPath) => {
 }
 
 .menu-item {
+  text-decoration: none;
+}
+
+.el-header .menu-item:hover {
   text-decoration: none;
 }
 
