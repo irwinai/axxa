@@ -2,7 +2,7 @@
     "routes": [
         {
             "src": "/api(.*)",
-            "dest": "http://109.123.231.12:8080$1"
+            "dest": "https://api.axxa.live/api$1"
         }
     ]
 }
