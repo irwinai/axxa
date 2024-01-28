@@ -1,8 +1,0 @@
-{
-    "routes": [
-        {
-            "src": "/api(.*)",
-            "dest": "https://api.axxa.live$1"
-        }
-    ]
-}
