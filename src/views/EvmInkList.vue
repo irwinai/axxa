@@ -18,7 +18,7 @@ let paging = reactive({
 
 });
 
-const url = '/api?type=POST&targetUrl=https://api.evm.ink/v1/graphql/';
+const url = import.meta.env.VITE_APP_EVM_URL + 'evm?type=POST&targetUrl=https://api.evm.ink/v1/graphql/';
 
 const inscriptionRequestJson = computed(() => {
     return {
