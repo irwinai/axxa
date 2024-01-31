@@ -19,6 +19,16 @@ export default {
             name: 'qna3',
             description: "AI-powered Web3 Knowledge Sharing Platform 🏆🏆 BNB Chain "
         },
-
+        {
+            logo: new URL('@/assets/media/web3/mint/bnetwork.jpeg', import.meta.url).href,
+            path: 'https://task.bsquared.network/leaderboard/?code=r0JksIL',
+            name: 'B² Network',
+            description: "50x cheaper, 300x faster than Bitcoin, with enhanced security."
+        },        {
+            logo: new URL('@/assets/media/web3/mint/bouncebit.png', import.meta.url).href,
+            path: 'https://bouncebit.io/',
+            name: 'BounceBit',
+            description: "Native BTC staking, dual-token PoS, mixed DeFi/CeFi yields."
+        },
     ]
 }
