@@ -1,5 +1,5 @@
 export default {
-    title: '开发工具',
+    title: '空投',
     data: [
         {
             logo: new URL('@/assets/media/web3/mint/well3.jpeg', import.meta.url).href,

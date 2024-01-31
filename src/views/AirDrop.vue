@@ -12,5 +12,3 @@ let airDropTool: any = ref(AirDropToolData);
   <Item :itemData="airDropData" />
   <Item :itemData="airDropTool" />
 </template>
-
-@/data/airdrop/airdrop
