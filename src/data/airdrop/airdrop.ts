@@ -24,11 +24,18 @@ export default {
             path: 'https://task.bsquared.network/leaderboard/?code=r0JksIL',
             name: 'B² Network',
             description: "50x cheaper, 300x faster than Bitcoin, with enhanced security."
-        },        {
+        },
+        {
             logo: new URL('@/assets/media/web3/mint/bouncebit.png', import.meta.url).href,
             path: 'https://bouncebit.io/',
             name: 'BounceBit',
             description: "Native BTC staking, dual-token PoS, mixed DeFi/CeFi yields."
+        },
+        {
+            logo: new URL('@/assets/media/web3/mint/ganggang.jpeg', import.meta.url).href,
+            path: 'https://web3.ganggang.site/gang-gcnjbm',
+            name: 'GangGang',
+            description: "A SocialFi project created by former members of TikTok, Meta, and Binance."
         },
     ]
 }
