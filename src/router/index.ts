@@ -8,6 +8,7 @@ import AuthorView from '@/views/Author.vue'
 import BatchCreateWalletView from '@/views/BatchCreateWallet.vue'
 import GameTurnup from '@/views/Turnup.vue'
 import AirDropView from '@/views/AirDrop.vue'
+import Ed25519Tool from '@/views/Ed25519Tool.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -82,6 +83,14 @@ const router = createRouter({
       component: GameTurnup,
       meta: {
         activeMenu: '4-3'
+      }
+    },
+    {
+      path: '/tools/ed25519',
+      name: 'ed25519',
+      component: Ed25519Tool,
+      meta: {
+        activeMenu: '4-4'
       }
     },
     {
