@@ -37,5 +37,55 @@ export default {
             name: 'GangGang',
             description: "A SocialFi project created by former members of TikTok, Meta, and Binance."
         },
+        {
+            logo: new URL('@/assets/media/web3/mint/nibiru.jpeg', import.meta.url).href,
+            path: 'https://nibiru.fi/airdrops',
+            name: 'nibiru',
+            description: "Nibiru, Binance投资，明牌空投"
+        },
+        {
+            logo: new URL('@/assets/media/web3/mint/gomble.jpeg', import.meta.url).href,
+            path: 'https://airdrop.gomble.io/airdrop',
+            name: 'gomble',
+            description: "链游，Binance投资"
+        },
+        {
+            logo: new URL('@/assets/media/web3/mint/bisocial.jpeg', import.meta.url).href,
+            path: 'https://bi.social/p/S8DLM',
+            name: 'bi.social',
+            description: "web3的twitter"
+        },
+        {
+            logo: new URL('@/assets/media/web3/mint/dflow.jpeg', import.meta.url).href,
+            path: 'https://dflow.net/en/reward',
+            name: 'dflow',
+            description: "solana defi"
+        },
+        {
+            logo: new URL('@/assets/media/web3/mint/merlin.jpeg', import.meta.url).href,
+            path: 'https://merlinchain.io/new',
+            name: 'merlin chain',
+            description: "比特币 Layer2"
+        },
+        {
+            logo: new URL('@/assets/media/web3/mint/tea.svg', import.meta.url).href,
+            path: 'https://app.tea.xyz/testnet',
+            name: 'Tea',
+            description: "Homebrew 作者弄的，binance,ok都投了"
+        },
+        {
+            logo: new URL('@/assets/media/web3/mint/babylon.jpeg', import.meta.url).href,
+            path: 'https://pioneers.babylonchain.io/',
+            name: 'babylon',
+            description: "千万融资，大项目"
+        },
+        {
+            logo: new URL('@/assets/media/web3/mint/taiko.jpeg', import.meta.url).href,
+            path: 'https://discord.gg/taikoxyz',
+            name: 'Taiko',
+            description: "千万融资，大项目"
+        },
+
+
     ]
 }
